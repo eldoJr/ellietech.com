@@ -1,0 +1,198 @@
+---
+const industries = [
+  {
+    name: 'Finance & Banking',
+    description: 'We build trading platforms, payment gateways, and regulatory-compliant fintech systems that process millions of transactions with sub-second latency and bank-grade security.',
+    capabilities: ['Payment processing', 'Risk analytics', 'KYC/AML compliance', 'Real-time trading'],
+    badge: 'PCI DSS',
+    size: 'large',
+  },
+  {
+    name: 'Healthcare',
+    description: 'HIPAA-compliant telemedicine platforms, electronic health records, and AI-powered diagnostic tools that connect patients with providers seamlessly.',
+    capabilities: ['EHR integration', 'Telemedicine', 'Clinical workflows', 'Medical imaging AI'],
+    badge: 'HIPAA',
+    size: 'medium',
+  },
+  {
+    name: 'E-Commerce',
+    description: 'High-traffic marketplaces handling 50K+ concurrent users with personalized recommendations, real-time inventory, and frictionless checkout flows.',
+    capabilities: ['Marketplaces', 'Inventory mgmt', 'Payments', 'Personalization'],
+    badge: null,
+    size: 'medium',
+  },
+  {
+    name: 'Education',
+    description: 'Adaptive learning platforms, live classroom systems, and AI-powered assessment engines that scale to millions of learners across geographies and languages.',
+    capabilities: ['LMS platforms', 'Adaptive learning', 'Live classrooms', 'Learning analytics'],
+    badge: null,
+    size: 'large',
+  },
+  {
+    name: 'Logistics',
+    description: 'Real-time fleet tracking, AI-driven route optimization, and warehouse automation systems.',
+    capabilities: ['Fleet tracking', 'Route AI', 'Warehouse ops'],
+    badge: null,
+    size: 'small',
+  },
+  {
+    name: 'Media',
+    description: 'Streaming infrastructure, content management, and audience engagement analytics at scale.',
+    capabilities: ['Streaming', 'CMS', 'Audience analytics'],
+    badge: null,
+    size: 'small',
+  },
+  {
+    name: 'Manufacturing',
+    description: 'IoT sensor dashboards, predictive maintenance ML models, and supply chain visibility platforms.',
+    capabilities: ['IoT dashboards', 'Predictive ML', 'Supply chain'],
+    badge: null,
+    size: 'small',
+  },
+  {
+    name: 'Insurance',
+    description: 'End-to-end claims automation, AI-powered underwriting engines, fraud detection systems, and self-service policy management portals for modern insurers.',
+    capabilities: ['Claims AI', 'Underwriting', 'Fraud detection', 'Policy portals'],
+    badge: null,
+    size: 'large',
+  },
+  {
+    name: 'Real Estate',
+    description: 'Property listing platforms, 3D virtual tours, and tenant management systems with smart contracts.',
+    capabilities: ['Listings', 'Virtual tours', 'Tenant mgmt'],
+    badge: null,
+    size: 'small',
+  },
+  {
+    name: 'Energy',
+    description: 'Smart grid monitoring, renewable energy forecasting, and real-time consumption analytics.',
+    capabilities: ['Smart grids', 'Forecasting', 'Analytics'],
+    badge: null,
+    size: 'small',
+  },
+  {
+    name: 'Government',
+    description: 'Secure citizen portals, open data transparency dashboards, and digital identity infrastructure built to the highest compliance standards.',
+    capabilities: ['Citizen portals', 'Open data', 'Digital identity', 'Security'],
+    badge: 'SOC 2',
+    size: 'medium',
+  },
+  {
+    name: 'Travel',
+    description: 'Booking engines with dynamic pricing, loyalty programs, and multi-currency payment systems.',
+    capabilities: ['Booking engines', 'Dynamic pricing', 'Loyalty'],
+    badge: null,
+    size: 'small',
+  },
+];
+---
+
+<section id="industries" class="px-6 py-32">
+  <div class="mx-auto max-w-[1440px] px-0 md:px-8">
+    <!-- Header -->
+    <div class="mb-16">
+      <span class="text-xs font-mono text-primary/70 uppercase tracking-widest mb-4 block">Industries</span>
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <h2 class="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+          Deep vertical expertise
+        </h2>
+        <p class="max-w-md text-sm leading-relaxed text-text-muted">
+          We don't just write code — we understand your industry's regulations, user expectations, and competitive landscape.
+        </p>
+      </div>
+    </div>
+
+    <!-- Bento grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 auto-rows-[140px] gap-[1px] bg-white/[0.04] border border-white/[0.06] industry-bento">
+      {industries.map((item, i) => {
+        const span = item.size === 'large' ? 'col-span-2 row-span-2' : item.size === 'medium' ? 'col-span-2 row-span-1' : 'col-span-1 row-span-1';
+        return (
+          <a
+            href="#contact"
+            class:list={[
+              'group relative bg-surface p-5 lg:p-6 flex flex-col justify-between overflow-hidden transition-all duration-500 hover:bg-[rgba(255,87,51,0.03)] industry-cell',
+              span,
+            ]}
+            data-index={i}
+          >
+            {/* Glow */}
+            <div class="absolute -top-16 -right-16 h-32 w-32 bg-primary/5 blur-3xl opacity-0 transition-opacity duration-700 group-hover:opacity-100"></div>
+
+            {/* Top row: name + badge */}
+            <div class="relative">
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <h3 class="text-sm font-semibold text-text-primary transition-colors duration-300 group-hover:text-primary lg:text-base">
+                  {item.name}
+                </h3>
+                {item.badge && (
+                  <span class="text-[8px] font-mono text-primary/70 uppercase tracking-wider border border-primary/20 px-1.5 py-0.5 flex-shrink-0">
+                    {item.badge}
+                  </span>
+                )}
+              </div>
+              {(item.size === 'large' || item.size === 'medium') && (
+                <p class="text-[11px] text-text-muted leading-relaxed max-w-sm">
+                  {item.description}
+                </p>
+              )}
+              {item.size === 'small' && (
+                <p class="text-[10px] text-text-muted/70 leading-relaxed">
+                  {item.description}
+                </p>
+              )}
+            </div>
+
+            {/* Bottom: capabilities */}
+            <div class="relative flex flex-wrap gap-x-3 gap-y-1 mt-auto">
+              {item.capabilities.map((cap) => (
+                <span class="text-[9px] text-text-muted/60 transition-colors duration-300 group-hover:text-text-muted">
+                  {cap}
+                </span>
+              ))}
+            </div>
+
+            {/* Hover arrow */}
+            <div class="absolute bottom-4 right-4 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+              <svg class="h-3.5 w-3.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 17L17 7M17 7H7M17 7v10" />
+              </svg>
+            </div>
+
+            {/* Bottom accent */}
+            <div class="absolute bottom-0 left-0 h-[1px] w-0 bg-gradient-to-r from-primary to-transparent transition-all duration-500 group-hover:w-full"></div>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const cells = entry.target.querySelectorAll('.industry-cell');
+          cells.forEach((cell, i) => {
+            setTimeout(() => {
+              (cell as HTMLElement).style.opacity = '1';
+              (cell as HTMLElement).style.transform = 'scale(1)';
+            }, i * 50);
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  const bento = document.querySelector('.industry-bento');
+  if (bento) {
+    bento.querySelectorAll('.industry-cell').forEach((cell) => {
+      (cell as HTMLElement).style.opacity = '0';
+      (cell as HTMLElement).style.transform = 'scale(0.95)';
+      (cell as HTMLElement).style.transition = 'opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+    });
+    observer.observe(bento);
+  }
+</script>

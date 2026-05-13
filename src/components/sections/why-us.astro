@@ -1,0 +1,106 @@
+---
+const reasons = [
+  {
+    title: 'Engineering-first culture',
+    description: 'We are engineers who build products, not an agency that outsources. Every line of code is written by senior developers who care about architecture, performance, and maintainability.',
+  },
+  {
+    title: 'Full ownership, zero excuses',
+    description: 'From the first commit to production monitoring — we own the entire lifecycle. No finger-pointing between teams, no handoff gaps, no "not our scope" excuses.',
+  },
+  {
+    title: 'Speed without shortcuts',
+    description: 'We ship MVPs in 4-6 weeks and scale to enterprise in months. Fast doesn\'t mean sloppy — it means focused scope, proven patterns, and relentless prioritization.',
+  },
+  {
+    title: 'Transparent by default',
+    description: 'Weekly demos, shared repos, real-time project boards. You see exactly what is being built, why decisions are made, and where your budget goes.',
+  },
+  {
+    title: 'Built to scale from day one',
+    description: 'We don\'t build prototypes that need rewriting. Our architecture decisions on day one support 10x growth without costly migrations or rewrites.',
+  },
+  {
+    title: 'Long-term partnership',
+    description: 'We don\'t disappear after launch. Ongoing support, performance optimization, and feature iteration — we grow with your product as your business evolves.',
+  },
+];
+---
+
+<section id="why-us" class="px-6 py-32">
+  <div class="mx-auto max-w-[1440px] px-0 md:px-8">
+    <!-- Header -->
+    <div class="mb-20 grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-start">
+      <div>
+        <span class="text-xs font-mono text-primary/70 uppercase tracking-widest mb-4 block">Why EllieTech</span>
+        <h2 class="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+          Why companies<br />choose us
+        </h2>
+      </div>
+      <div class="lg:pt-10">
+        <p class="text-sm leading-relaxed text-text-secondary max-w-md">
+          We are not the cheapest option. We are the one that ships on time, scales without breaking, and does not need to be rebuilt in 18 months.
+        </p>
+      </div>
+    </div>
+
+    <!-- Reasons — staggered two-column -->
+    <div class="grid gap-x-16 gap-y-0 lg:grid-cols-2 why-grid">
+      {reasons.map((reason, i) => (
+        <div
+          class="group relative py-8 border-b border-white/[0.06] why-item"
+          data-index={i}
+        >
+          <div class="flex gap-5">
+            {/* Number */}
+            <span class="text-3xl font-bold text-white/[0.04] transition-colors duration-500 group-hover:text-primary/20 flex-shrink-0 leading-none pt-1">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+
+            <div>
+              <h3 class="text-base font-semibold text-text-primary mb-2 transition-colors duration-300 group-hover:text-primary lg:text-lg">
+                {reason.title}
+              </h3>
+              <p class="text-xs text-text-muted leading-relaxed max-w-sm">
+                {reason.description}
+              </p>
+            </div>
+          </div>
+
+          {/* Hover accent */}
+          <div class="absolute bottom-0 left-0 h-[1px] w-0 bg-gradient-to-r from-primary to-transparent transition-all duration-500 group-hover:w-1/2"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const items = entry.target.querySelectorAll('.why-item');
+          items.forEach((item, i) => {
+            setTimeout(() => {
+              (item as HTMLElement).style.opacity = '1';
+              (item as HTMLElement).style.transform = 'translateY(0)';
+            }, i * 70);
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  const grid = document.querySelector('.why-grid');
+  if (grid) {
+    grid.querySelectorAll('.why-item').forEach((item) => {
+      (item as HTMLElement).style.opacity = '0';
+      (item as HTMLElement).style.transform = 'translateY(16px)';
+      (item as HTMLElement).style.transition = 'opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+    });
+    observer.observe(grid);
+  }
+</script>

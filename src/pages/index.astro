@@ -5,12 +5,14 @@ import Footer from '../components/footer.astro';
 import Hero from '../components/sections/hero.astro';
 import Services from '../components/sections/services.astro';
 import Work from '../components/sections/work.astro';
+import WhyUs from '../components/sections/why-us.astro';
+import MiniCTA2 from '../components/sections/mini-cta-2.astro';
 import Process from '../components/sections/process.astro';
 import TechStack from '../components/sections/tech-stack.astro';
+import Industries from '../components/sections/industries.astro';
+import MiniCTA from '../components/sections/mini-cta.astro';
 import Testimonials from '../components/sections/testimonials.astro';
-import About from '../components/sections/about.astro';
 import FAQ from '../components/sections/faq.astro';
-import CTA from '../components/sections/cta.astro';
 import Contact from '../components/sections/contact.astro';
 import BackToTop from '../components/common/back-to-top.astro';
 ---
@@ -20,13 +22,15 @@ import BackToTop from '../components/common/back-to-top.astro';
   <main id="main-content">
     <Hero />
     <Services />
+    <TechStack />
+    <Industries />
+    <MiniCTA />
     <Process />
     <Work />
-    <TechStack />
+    <WhyUs />
     <Testimonials />
-    <About />
+    <MiniCTA2 />
     <FAQ />
-    <CTA />
     <Contact />
   </main>
   <Footer />

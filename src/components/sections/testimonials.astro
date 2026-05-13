@@ -1,54 +1,238 @@
 ---
-import Card from '../ui/card.astro';
-import Badge from '../ui/badge.astro';
-import Avatar from '../ui/avatar.astro';
-
 const testimonials = [
   {
-    quote: 'EllieTech delivered a production-ready AI platform in half the time we expected. Their engineering quality is exceptional.',
+    quote: 'EllieTech delivered a production-ready AI platform in half the time we expected. Their engineering quality is exceptional — clean architecture, thorough testing, and zero technical debt.',
     name: 'Sarah Chen',
-    role: 'CTO, DataFlow',
-    avatar: null,
+    role: 'CTO',
+    company: 'DataFlow',
   },
   {
-    quote: 'The mobile app they built handles 100K+ daily users without breaking a sweat. Truly world-class engineering.',
+    quote: 'The mobile app they built handles 120K daily active users without breaking a sweat. They think in systems, not just features. Truly world-class engineering.',
     name: 'Marcus Rivera',
-    role: 'Founder, FinPay',
-    avatar: null,
+    role: 'Founder & CEO',
+    company: 'FinPay',
   },
   {
-    quote: 'Working with EllieTech felt like having a senior engineering team on demand. They think in systems, not just features.',
+    quote: 'Working with EllieTech felt like having a senior engineering team on demand. They challenged our assumptions, proposed better solutions, and shipped faster than our internal team.',
     name: 'Aisha Patel',
-    role: 'VP Engineering, ScaleUp',
-    avatar: null,
+    role: 'VP Engineering',
+    company: 'ScaleUp',
+  },
+  {
+    quote: 'We needed a partner who understood healthcare compliance inside out. EllieTech built our telemedicine platform HIPAA-compliant from day one — no retrofitting needed.',
+    name: 'Dr. James Okafor',
+    role: 'Chief Medical Officer',
+    company: 'MedConnect',
+  },
+  {
+    quote: 'They reduced our cloud costs by 40% while improving performance. The infrastructure migration was seamless — zero downtime, zero data loss. Impressive execution.',
+    name: 'Lisa Andersson',
+    role: 'Head of Platform',
+    company: 'NordTech',
+  },
+  {
+    quote: 'From concept to App Store in 5 weeks. EllieTech moves fast without cutting corners. Our investors were blown away by the quality of the MVP.',
+    name: 'Tom Nakamura',
+    role: 'Co-founder',
+    company: 'Launchpad',
   },
 ];
 ---
 
-<section id="testimonials" class="px-6 py-32">
-  <div class="mx-auto max-w-7xl">
-    <div class="mb-16 max-w-2xl">
-      <Badge class="mb-4">Testimonials</Badge>
-      <h2 class="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
-        Trusted by ambitious<br />engineering teams
-      </h2>
+<section id="testimonials" class="px-6 py-32 overflow-hidden">
+  <div class="mx-auto max-w-[1440px] px-0 md:px-8">
+    <!-- Header -->
+    <div class="mb-16 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+      <div>
+        <span class="text-xs font-mono text-primary/70 uppercase tracking-widest mb-4 block">Testimonials</span>
+        <h2 class="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+          What our clients say
+        </h2>
+      </div>
+      <div class="flex items-center gap-3">
+        <button id="t-prev" class="flex h-9 w-9 items-center justify-center border border-white/[0.08] text-text-muted transition-all duration-200 hover:border-primary/30 hover:text-primary cursor-pointer rounded-sm" aria-label="Previous">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <div class="flex gap-1.5" id="t-dots"></div>
+        <button id="t-next" class="flex h-9 w-9 items-center justify-center border border-white/[0.08] text-text-muted transition-all duration-200 hover:border-primary/30 hover:text-primary cursor-pointer rounded-sm" aria-label="Next">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
     </div>
 
-    <div class="grid gap-6 md:grid-cols-3">
-      {
-        testimonials.map((t) => (
-          <Card class="flex flex-col justify-between">
-            <p class="mb-6 text-sm leading-relaxed text-text-secondary italic">"{t.quote}"</p>
-            <div class="flex items-center gap-3">
-              <Avatar alt={t.name} size="sm" />
+    <!-- Marquee track -->
+    <div class="relative" id="t-container">
+      <div class="flex gap-6 t-track" id="t-track">
+        {testimonials.map((t, i) => (
+          <div
+            class="t-card flex-shrink-0 w-[85vw] sm:w-[420px] lg:w-[460px] border border-white/[0.06] p-8 flex flex-col justify-between transition-all duration-500"
+            data-card={i}
+          >
+            <div>
+              <svg class="h-5 w-5 text-primary/25 mb-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11h4v10H0z" />
+              </svg>
+              <p class="text-sm text-text-secondary leading-relaxed italic">{t.quote}</p>
+            </div>
+            <div class="flex items-center gap-3 mt-6 pt-5 border-t border-white/[0.04]">
+              <div class="flex h-9 w-9 items-center justify-center bg-surface-elevated border border-white/[0.06] text-[10px] font-semibold text-primary/70 flex-shrink-0">
+                {t.name.split(' ').map(n => n[0]).join('')}
+              </div>
               <div>
-                <div class="text-sm font-medium">{t.name}</div>
-                <div class="text-xs text-text-muted">{t.role}</div>
+                <div class="text-sm font-medium text-text-primary">{t.name}</div>
+                <div class="text-[11px] text-text-muted">{t.role}, {t.company}</div>
               </div>
             </div>
-          </Card>
-        ))
-      }
+          </div>
+        ))}
+      </div>
+
+      <!-- Fade edges -->
+      <div class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-surface to-transparent pointer-events-none z-10"></div>
+      <div class="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-surface to-transparent pointer-events-none z-10"></div>
     </div>
   </div>
 </section>
+
+<style>
+  .t-track {
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+  }
+
+  .t-card {
+    opacity: 0.4;
+    transform: scale(0.95);
+    transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
+  }
+
+  .t-card.is-active {
+    opacity: 1;
+    transform: scale(1);
+    border-color: rgba(255, 87, 51, 0.15);
+  }
+
+  .t-dot {
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.4s ease;
+    cursor: pointer;
+  }
+
+  .t-dot.is-active {
+    background: #ff5733;
+    width: 20px;
+  }
+</style>
+
+<script>
+  const track = document.getElementById('t-track') as HTMLElement;
+  const container = document.getElementById('t-container') as HTMLElement;
+  const cards = document.querySelectorAll<HTMLElement>('.t-card');
+  const dotsContainer = document.getElementById('t-dots') as HTMLElement;
+  const prevBtn = document.getElementById('t-prev');
+  const nextBtn = document.getElementById('t-next');
+
+  const total = cards.length;
+  let current = 0;
+  let autoplayTimer: ReturnType<typeof setInterval>;
+
+  // Create dots
+  for (let i = 0; i < total; i++) {
+    const dot = document.createElement('button');
+    dot.className = 't-dot rounded-full';
+    dot.setAttribute('aria-label', `Go to testimonial ${i + 1}`);
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+  }
+
+  const dots = dotsContainer.querySelectorAll<HTMLElement>('.t-dot');
+
+  function getOffset(index: number): number {
+    const card = cards[index];
+    const containerRect = container.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const trackRect = track.getBoundingClientRect();
+
+    // Center the active card
+    const containerCenter = containerRect.width / 2;
+    const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+    return -(cardCenter - containerCenter);
+  }
+
+  function goTo(index: number) {
+    current = ((index % total) + total) % total;
+    const offset = getOffset(current);
+    track.style.transform = `translateX(${offset}px)`;
+
+    // Update active states
+    cards.forEach((card, i) => {
+      card.classList.toggle('is-active', i === current);
+    });
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('is-active', i === current);
+    });
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  // Init
+  goTo(0);
+
+  // Recalculate on resize
+  window.addEventListener('resize', () => goTo(current));
+
+  // Controls
+  nextBtn?.addEventListener('click', () => { next(); resetAutoplay(); });
+  prevBtn?.addEventListener('click', () => { prev(); resetAutoplay(); });
+
+  // Touch/drag support
+  let startX = 0;
+  let isDragging = false;
+
+  track.addEventListener('pointerdown', (e) => {
+    startX = e.clientX;
+    isDragging = true;
+    track.style.transition = 'none';
+  });
+
+  track.addEventListener('pointermove', (e) => {
+    if (!isDragging) return;
+    const diff = e.clientX - startX;
+    const offset = getOffset(current);
+    track.style.transform = `translateX(${offset + diff}px)`;
+  });
+
+  track.addEventListener('pointerup', (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    track.style.transition = '';
+    const diff = e.clientX - startX;
+    if (diff < -50) next();
+    else if (diff > 50) prev();
+    else goTo(current);
+    resetAutoplay();
+  });
+
+  // Autoplay
+  function startAutoplay() {
+    autoplayTimer = setInterval(next, 5000);
+  }
+
+  function resetAutoplay() {
+    clearInterval(autoplayTimer);
+    startAutoplay();
+  }
+
+  startAutoplay();
+
+  // Pause on hover
+  container.addEventListener('mouseenter', () => clearInterval(autoplayTimer));
+  container.addEventListener('mouseleave', startAutoplay);
+</script>

@@ -1,79 +1,121 @@
 ---
+import { SITE } from '../lib/constants';
+
 const currentYear = new Date().getFullYear();
 
-const links = {
-  company: [
-    { label: 'About', href: '#about' },
-    { label: 'Services', href: '#services' },
-    { label: 'Work', href: '#work' },
-    { label: 'Blog', href: '/blog' },
-  ],
-  connect: [
-    { label: 'GitHub', href: 'https://github.com/ellietech' },
-    { label: 'Twitter', href: 'https://twitter.com/ellietech' },
-    { label: 'LinkedIn', href: 'https://linkedin.com/company/ellietech' },
-  ],
-};
+const services = [
+  { label: 'Full-Stack Development', href: '#services' },
+  { label: 'Mobile Development', href: '#services' },
+  { label: 'AI & Automation', href: '#services' },
+  { label: 'Cloud & Infrastructure', href: '#services' },
+  { label: 'UI/UX Design', href: '#services' },
+  { label: 'Staff Augmentation', href: '#contact' },
+];
+
+const company = [
+  { label: 'Services', href: '#services' },
+  { label: 'Technologies', href: '#tech-stack' },
+  { label: 'Industries', href: '#industries' },
+  { label: 'Portfolio', href: '#work' },
+  { label: 'Process', href: '#process' },
+  { label: 'Blog', href: '/blog' },
+];
+
+const industries = [
+  { label: 'Finance & Banking', href: '#industries' },
+  { label: 'Healthcare', href: '#industries' },
+  { label: 'E-Commerce', href: '#industries' },
+  { label: 'Education', href: '#industries' },
+  { label: 'Logistics', href: '#industries' },
+  { label: 'Manufacturing', href: '#industries' },
+];
+
+const socials = [
+  { label: 'GitHub', href: 'https://github.com/ellietech' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/company/ellietech' },
+  { label: 'Twitter', href: 'https://twitter.com/ellietech' },
+];
 ---
 
-<footer class="border-t border-border/50 bg-surface">
-  <div class="mx-auto max-w-7xl px-6 py-16">
-    <div class="grid gap-12 md:grid-cols-3">
+<footer class="px-6 pt-20 pb-8 border-t border-white/[0.06]">
+  <div class="mx-auto max-w-[1440px] px-0 md:px-8">
+    <!-- Main grid -->
+    <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr] mb-16">
       <!-- Brand -->
-      <div class="space-y-4">
-        <a href="/" class="text-xl font-bold tracking-tight">
-          <span class="text-primary">Ellie</span><span>Tech</span>
+      <div>
+        <a href="/" class="inline-block mb-5">
+          <img src="/logo.svg" alt={SITE.name} class="h-7 w-auto" />
         </a>
-        <p class="max-w-xs text-sm leading-relaxed text-text-secondary">
-          Modern engineering studio building full-stack, mobile, and AI-powered digital products.
+        <p class="text-xs text-text-muted leading-relaxed max-w-xs mb-6">
+          Modern engineering studio building full-stack, mobile, and AI-powered digital products for companies that demand performance.
         </p>
+        <div class="flex items-center gap-4">
+          {socials.map((s) => (
+            <a
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-xs text-text-muted transition-colors duration-200 hover:text-primary"
+            >
+              {s.label}
+            </a>
+          ))}
+        </div>
       </div>
 
-      <!-- Company links -->
+      <!-- Services -->
       <div>
-        <h4 class="mb-4 text-sm font-semibold uppercase tracking-wider text-text-muted">Company</h4>
+        <h4 class="text-[11px] font-mono uppercase tracking-wider text-text-muted/50 mb-5">Services</h4>
         <ul class="space-y-3">
-          {
-            links.company.map((link) => (
-              <li>
-                <a href={link.href} class="text-sm text-text-secondary transition-colors hover:text-text-primary">
-                  {link.label}
-                </a>
-              </li>
-            ))
-          }
+          {services.map((link) => (
+            <li>
+              <a href={link.href} class="text-xs text-text-muted transition-colors duration-200 hover:text-text-secondary">
+                {link.label}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
 
-      <!-- Connect links -->
+      <!-- Company -->
       <div>
-        <h4 class="mb-4 text-sm font-semibold uppercase tracking-wider text-text-muted">Connect</h4>
+        <h4 class="text-[11px] font-mono uppercase tracking-wider text-text-muted/50 mb-5">Company</h4>
         <ul class="space-y-3">
-          {
-            links.connect.map((link) => (
-              <li>
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="text-sm text-text-secondary transition-colors hover:text-text-primary"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))
-          }
+          {company.map((link) => (
+            <li>
+              <a href={link.href} class="text-xs text-text-muted transition-colors duration-200 hover:text-text-secondary">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Industries -->
+      <div>
+        <h4 class="text-[11px] font-mono uppercase tracking-wider text-text-muted/50 mb-5">Industries</h4>
+        <ul class="space-y-3">
+          {industries.map((link) => (
+            <li>
+              <a href={link.href} class="text-xs text-text-muted transition-colors duration-200 hover:text-text-secondary">
+                {link.label}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
 
-    <div class="mt-16 flex flex-col items-center justify-between gap-4 border-t border-border/50 pt-8 md:flex-row">
-      <p class="text-sm text-text-muted">
+    <!-- Bottom bar -->
+    <div class="flex flex-col gap-4 border-t border-white/[0.06] pt-8 sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-[11px] text-text-muted/40">
         &copy; {currentYear} EllieTech. All rights reserved.
       </p>
-      <p class="text-sm text-text-muted">
-        Built with precision and purpose.
-      </p>
+      <div class="flex items-center gap-6">
+        <a href="#" class="text-[11px] text-text-muted/40 transition-colors duration-200 hover:text-text-muted">Privacy Policy</a>
+        <a href="#" class="text-[11px] text-text-muted/40 transition-colors duration-200 hover:text-text-muted">Terms of Service</a>
+        <a href="#" class="text-[11px] text-text-muted/40 transition-colors duration-200 hover:text-text-muted">Cookie Policy</a>
+      </div>
     </div>
   </div>
 </footer>
