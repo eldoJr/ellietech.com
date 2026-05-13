@@ -1,0 +1,59 @@
+---
+import Card from '../ui/card.astro';
+import Badge from '../ui/badge.astro';
+
+const projects = [
+  {
+    title: 'AI-Powered Analytics Platform',
+    description: 'Real-time data analytics with ML-driven insights for enterprise clients. Processing 10M+ events daily.',
+    category: 'AI / SaaS',
+    tech: ['Python', 'React', 'AWS', 'TensorFlow'],
+  },
+  {
+    title: 'FinTech Mobile App',
+    description: 'Cross-platform banking application with biometric auth, real-time transactions, and smart budgeting.',
+    category: 'Mobile / FinTech',
+    tech: ['React Native', 'Node.js', 'PostgreSQL'],
+  },
+  {
+    title: 'E-Commerce Marketplace',
+    description: 'High-traffic marketplace handling 50K+ concurrent users with sub-200ms response times.',
+    category: 'Full-Stack / E-Commerce',
+    tech: ['Next.js', 'GraphQL', 'Redis', 'Stripe'],
+  },
+];
+---
+
+<section id="work" class="px-6 py-32">
+  <div class="mx-auto max-w-7xl">
+    <div class="mb-16 max-w-2xl">
+      <Badge class="mb-4">Our Work</Badge>
+      <h2 class="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
+        Projects that push<br />boundaries
+      </h2>
+      <p class="text-lg text-text-secondary">
+        A selection of products we've engineered for ambitious teams around the world.
+      </p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-3">
+      {
+        projects.map((project) => (
+          <Card class="flex flex-col">
+            <div class="mb-4 flex h-40 items-center justify-center rounded-xl bg-gradient-to-br from-surface-elevated to-surface">
+              <span class="text-4xl opacity-50">⬡</span>
+            </div>
+            <Badge variant="primary" class="mb-3 self-start">{project.category}</Badge>
+            <h3 class="mb-2 text-lg font-semibold">{project.title}</h3>
+            <p class="mb-4 flex-1 text-sm leading-relaxed text-text-secondary">{project.description}</p>
+            <div class="flex flex-wrap gap-2">
+              {project.tech.map((t) => (
+                <span class="rounded-md bg-surface px-2 py-1 text-xs text-text-muted">{t}</span>
+              ))}
+            </div>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</section>

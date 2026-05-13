@@ -1,0 +1,21 @@
+---
+import Badge from './badge.astro';
+
+interface Props {
+  badge?: string;
+  badgeVariant?: 'default' | 'primary' | 'accent';
+  title: string;
+  description?: string;
+  align?: 'left' | 'center';
+}
+
+const { badge, badgeVariant = 'primary', title, description, align = 'left' } = Astro.props;
+
+const alignClasses = align === 'center' ? 'text-center mx-auto' : '';
+---
+
+<div class:list={['mb-16 max-w-2xl', alignClasses]}>
+  {badge && <Badge variant={badgeVariant} class="mb-4">{badge}</Badge>}
+  <h2 class="mb-4 text-3xl font-bold tracking-tight sm:text-4xl" set:html={title} />
+  {description && <p class="text-lg text-text-secondary">{description}</p>}
+</div>

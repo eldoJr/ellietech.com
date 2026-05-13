@@ -1,0 +1,60 @@
+---
+import Button from '../ui/button.astro';
+import Badge from '../ui/badge.astro';
+---
+
+<section id="contact" class="px-6 py-32">
+  <div class="mx-auto max-w-3xl text-center">
+    <Badge variant="primary" class="mb-4">Let's Talk</Badge>
+    <h2 class="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
+      Ready to build something<br />extraordinary?
+    </h2>
+    <p class="mb-10 text-lg text-text-secondary">
+      Whether you're launching a new product or scaling an existing one, we'd love to hear about your vision.
+    </p>
+
+    <div class="mx-auto max-w-lg rounded-2xl border border-border/50 bg-surface-light p-8">
+      <form class="space-y-4 text-left">
+        <div>
+          <label for="name" class="mb-1 block text-sm font-medium text-text-secondary">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            class="w-full rounded-lg border border-border bg-surface px-4 py-3 text-sm text-text-primary placeholder-text-muted outline-none transition-colors focus:border-primary"
+            placeholder="Your name"
+          />
+        </div>
+        <div>
+          <label for="email" class="mb-1 block text-sm font-medium text-text-secondary">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="w-full rounded-lg border border-border bg-surface px-4 py-3 text-sm text-text-primary placeholder-text-muted outline-none transition-colors focus:border-primary"
+            placeholder="you@company.com"
+          />
+        </div>
+        <div>
+          <label for="message" class="mb-1 block text-sm font-medium text-text-secondary">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="4"
+            required
+            class="w-full resize-none rounded-lg border border-border bg-surface px-4 py-3 text-sm text-text-primary placeholder-text-muted outline-none transition-colors focus:border-primary"
+            placeholder="Tell us about your project..."
+          ></textarea>
+        </div>
+        <Button variant="primary" size="lg" class="w-full">
+          Send Message
+          <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+          </svg>
+        </Button>
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,54 @@
+---
+import Card from '../ui/card.astro';
+import Badge from '../ui/badge.astro';
+import Avatar from '../ui/avatar.astro';
+
+const testimonials = [
+  {
+    quote: 'EllieTech delivered a production-ready AI platform in half the time we expected. Their engineering quality is exceptional.',
+    name: 'Sarah Chen',
+    role: 'CTO, DataFlow',
+    avatar: null,
+  },
+  {
+    quote: 'The mobile app they built handles 100K+ daily users without breaking a sweat. Truly world-class engineering.',
+    name: 'Marcus Rivera',
+    role: 'Founder, FinPay',
+    avatar: null,
+  },
+  {
+    quote: 'Working with EllieTech felt like having a senior engineering team on demand. They think in systems, not just features.',
+    name: 'Aisha Patel',
+    role: 'VP Engineering, ScaleUp',
+    avatar: null,
+  },
+];
+---
+
+<section id="testimonials" class="px-6 py-32">
+  <div class="mx-auto max-w-7xl">
+    <div class="mb-16 max-w-2xl">
+      <Badge class="mb-4">Testimonials</Badge>
+      <h2 class="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
+        Trusted by ambitious<br />engineering teams
+      </h2>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-3">
+      {
+        testimonials.map((t) => (
+          <Card class="flex flex-col justify-between">
+            <p class="mb-6 text-sm leading-relaxed text-text-secondary italic">"{t.quote}"</p>
+            <div class="flex items-center gap-3">
+              <Avatar alt={t.name} size="sm" />
+              <div>
+                <div class="text-sm font-medium">{t.name}</div>
+                <div class="text-xs text-text-muted">{t.role}</div>
+              </div>
+            </div>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</section>

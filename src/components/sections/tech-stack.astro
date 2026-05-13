@@ -1,0 +1,61 @@
+---
+import Badge from '../ui/badge.astro';
+
+const categories = [
+  {
+    name: 'Frontend',
+    tools: ['React', 'Next.js', 'Astro', 'Vue', 'TypeScript', 'Tailwind CSS'],
+  },
+  {
+    name: 'Backend',
+    tools: ['Node.js', 'Python', 'Go', 'GraphQL', 'REST', 'gRPC'],
+  },
+  {
+    name: 'Mobile',
+    tools: ['React Native', 'Flutter', 'iOS (Swift)', 'Android (Kotlin)'],
+  },
+  {
+    name: 'AI / ML',
+    tools: ['TensorFlow', 'PyTorch', 'OpenAI', 'LangChain', 'Hugging Face'],
+  },
+  {
+    name: 'Cloud & DevOps',
+    tools: ['AWS', 'GCP', 'Docker', 'Kubernetes', 'Terraform', 'CI/CD'],
+  },
+  {
+    name: 'Data',
+    tools: ['PostgreSQL', 'Redis', 'MongoDB', 'Elasticsearch', 'Kafka'],
+  },
+];
+---
+
+<section id="tech-stack" class="px-6 py-32 border-t border-border/50">
+  <div class="mx-auto max-w-7xl">
+    <div class="mb-16 text-center mx-auto max-w-2xl">
+      <Badge variant="accent" class="mb-4">Tech Stack</Badge>
+      <h2 class="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
+        Built with the best tools
+      </h2>
+      <p class="text-lg text-text-secondary">
+        We choose technologies based on your product's needs — never the other way around.
+      </p>
+    </div>
+
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        categories.map((cat) => (
+          <div class="space-y-3">
+            <h3 class="text-sm font-semibold uppercase tracking-wider text-text-muted">{cat.name}</h3>
+            <div class="flex flex-wrap gap-2">
+              {cat.tools.map((tool) => (
+                <span class="rounded-lg border border-border/50 bg-surface-light px-3 py-1.5 text-xs text-text-secondary">
+                  {tool}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

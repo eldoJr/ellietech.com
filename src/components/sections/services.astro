@@ -1,0 +1,62 @@
+---
+import Card from '../ui/card.astro';
+import Badge from '../ui/badge.astro';
+
+const services = [
+  {
+    icon: '⚡',
+    title: 'Full-Stack Development',
+    description: 'End-to-end web applications built with modern frameworks. From APIs to pixel-perfect interfaces.',
+    tags: ['React', 'Next.js', 'Node.js', 'PostgreSQL'],
+  },
+  {
+    icon: '📱',
+    title: 'Mobile Development',
+    description: 'Cross-platform and native mobile apps that deliver seamless experiences on every device.',
+    tags: ['React Native', 'iOS', 'Android', 'Flutter'],
+  },
+  {
+    icon: '🧠',
+    title: 'AI & Machine Learning',
+    description: 'Intelligent systems that learn, adapt, and automate. From NLP to computer vision and beyond.',
+    tags: ['Python', 'TensorFlow', 'OpenAI', 'LangChain'],
+  },
+  {
+    icon: '☁️',
+    title: 'Cloud & Infrastructure',
+    description: 'Scalable, secure cloud architecture designed for high availability and global performance.',
+    tags: ['AWS', 'Docker', 'Kubernetes', 'Terraform'],
+  },
+];
+---
+
+<section id="services" class="px-6 py-32">
+  <div class="mx-auto max-w-7xl">
+    <div class="mb-16 max-w-2xl">
+      <Badge variant="accent" class="mb-4">What We Do</Badge>
+      <h2 class="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
+        Engineering excellence,<br />delivered end-to-end
+      </h2>
+      <p class="text-lg text-text-secondary">
+        We specialize in building high-performance digital products across the full technology spectrum.
+      </p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2">
+      {
+        services.map((service) => (
+          <Card>
+            <div class="mb-4 text-3xl">{service.icon}</div>
+            <h3 class="mb-2 text-lg font-semibold">{service.title}</h3>
+            <p class="mb-4 text-sm leading-relaxed text-text-secondary">{service.description}</p>
+            <div class="flex flex-wrap gap-2">
+              {service.tags.map((tag) => (
+                <span class="rounded-md bg-surface px-2 py-1 text-xs text-text-muted">{tag}</span>
+              ))}
+            </div>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</section>

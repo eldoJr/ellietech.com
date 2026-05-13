@@ -1,0 +1,51 @@
+---
+import Badge from '../ui/badge.astro';
+
+const faqs = [
+  {
+    question: 'What types of projects do you take on?',
+    answer: 'We work on full-stack web apps, mobile applications, AI/ML systems, and cloud infrastructure. From MVPs to enterprise-scale platforms.',
+  },
+  {
+    question: 'How long does a typical project take?',
+    answer: 'MVPs typically take 4-8 weeks. Larger products range from 3-6 months. We provide detailed timelines during the discovery phase.',
+  },
+  {
+    question: 'Do you work with startups or enterprises?',
+    answer: 'Both. We adapt our process to fit your stage — whether you need to move fast for a launch or meet enterprise compliance requirements.',
+  },
+  {
+    question: 'What does your pricing look like?',
+    answer: 'We offer project-based pricing and monthly retainers. Every engagement starts with a scoped proposal so there are no surprises.',
+  },
+  {
+    question: 'Can you work with our existing team?',
+    answer: 'Absolutely. We integrate seamlessly with in-house teams, following your workflows, code standards, and communication tools.',
+  },
+];
+---
+
+<section id="faq" class="px-6 py-32 border-t border-border/50">
+  <div class="mx-auto max-w-3xl">
+    <div class="mb-16 text-center">
+      <Badge class="mb-4">FAQ</Badge>
+      <h2 class="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
+        Common questions
+      </h2>
+    </div>
+
+    <div class="space-y-6">
+      {
+        faqs.map((faq) => (
+          <details class="group rounded-2xl border border-border/50 bg-surface-light p-6 transition-all hover:border-border">
+            <summary class="flex cursor-pointer items-center justify-between text-base font-medium list-none">
+              {faq.question}
+              <span class="ml-4 text-text-muted transition-transform group-open:rotate-45">+</span>
+            </summary>
+            <p class="mt-4 text-sm leading-relaxed text-text-secondary">{faq.answer}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

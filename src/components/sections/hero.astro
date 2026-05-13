@@ -1,0 +1,62 @@
+---
+import Button from '../ui/button.astro';
+import Badge from '../ui/badge.astro';
+import DarkVeil from '../ui/dark-veil.astro';
+---
+
+<section class="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-20">
+  <!-- WebGL Background -->
+  <div class="pointer-events-none absolute inset-0 h-full w-full">
+    <DarkVeil speed={0.3} hueShift={0} noiseIntensity={0.02} warpAmount={0.3} resolutionScale={0.75} />
+    <!-- Lighter overlay to let the shader breathe -->
+    <div class="absolute inset-0 bg-gradient-to-b from-surface/40 via-surface/30 to-surface/80"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-5xl text-center">
+    <Badge variant="primary" class="mb-6">Engineering the Future</Badge>
+
+    <h1 class="mb-6 text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+      We build
+      <span class="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+        digital products
+      </span>
+      <br />that scale globally
+    </h1>
+
+    <p class="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-text-secondary sm:text-xl">
+      Full-stack web, mobile, and AI-powered systems — engineered with precision for startups and enterprises that demand performance.
+    </p>
+
+    <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+      <Button variant="primary" size="lg" href="#contact">
+        Start a Project
+        <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </Button>
+      <Button variant="secondary" size="lg" href="#work">
+        View Our Work
+      </Button>
+    </div>
+
+    <!-- Tech stack indicators -->
+    <div class="mt-20 flex flex-wrap items-center justify-center gap-6 text-sm text-text-muted">
+      <span class="flex items-center gap-2">
+        <span class="h-2 w-2 rounded-full bg-primary"></span>
+        React / Next.js
+      </span>
+      <span class="flex items-center gap-2">
+        <span class="h-2 w-2 rounded-full bg-accent"></span>
+        React Native
+      </span>
+      <span class="flex items-center gap-2">
+        <span class="h-2 w-2 rounded-full bg-green-400"></span>
+        Node.js / Python
+      </span>
+      <span class="flex items-center gap-2">
+        <span class="h-2 w-2 rounded-full bg-purple-400"></span>
+        AI / ML
+      </span>
+    </div>
+  </div>
+</section>
