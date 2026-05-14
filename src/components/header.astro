@@ -86,7 +86,12 @@ const servicesRight = {
 <header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
 
   <!-- Main nav -->
-  <div id="main-nav" class="relative" style="background: transparent; border: 1px solid transparent; border-radius: 0; margin: 0; box-shadow: none; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
+  <div id="main-nav" class="relative" style="border: 1px solid transparent; border-radius: 0; margin: 0; box-shadow: none; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
+    <!-- Glass background layer (like nhonga) -->
+    <div id="nav-glass" class="absolute inset-0 opacity-0 transition-opacity duration-300" style="border-radius: inherit; overflow: hidden;">
+      <div class="absolute inset-0 backdrop-blur-xl bg-[rgba(17,17,23,0.7)] dark:bg-[rgba(17,17,23,0.7)]" style="-webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px);"></div>
+    </div>
+    
     <!-- Mouse-follow glow -->
     <div id="nav-glow" class="pointer-events-none absolute inset-0 z-[1] overflow-hidden rounded-[inherit] opacity-0 transition-opacity duration-500" style="background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,87,51,0.12), transparent 60%);"></div>
     <nav class="relative z-[2] mx-auto flex max-w-[1440px] items-stretch px-6 md:px-8">
@@ -480,6 +485,12 @@ const servicesRight = {
     opacity: 1 !important;
   }
 
+  /* Ensure backdrop-filter is applied */
+  #nav-glass > div {
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+  }
+
   /* Dock effect — handled by JS direct style */
   #main-nav {
     will-change: background, border-radius, margin, border-color, box-shadow, backdrop-filter;
@@ -694,20 +705,14 @@ const servicesRight = {
 
   function dockIn() {
     if (!mainNav) return;
-    mainNav.style.background = 'linear-gradient(135deg, rgba(25, 25, 35, 0.98), rgba(15, 15, 22, 0.98))';
-    mainNav.style.backdropFilter = 'blur(20px)';
-    (mainNav.style as any).webkitBackdropFilter = 'blur(20px)';
     mainNav.style.borderRadius = '14px';
     mainNav.style.margin = isLg() ? '10px 40px' : '8px 16px';
     mainNav.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-    mainNav.style.boxShadow = '0 4px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03) inset';
+    mainNav.style.boxShadow = '0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05) inset';
   }
 
   function dockOut() {
     if (!mainNav) return;
-    mainNav.style.background = 'transparent';
-    mainNav.style.backdropFilter = 'none';
-    (mainNav.style as any).webkitBackdropFilter = 'none';
     mainNav.style.borderRadius = '0';
     mainNav.style.margin = '0';
     mainNav.style.borderColor = 'transparent';
