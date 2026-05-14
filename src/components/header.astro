@@ -84,30 +84,12 @@ const servicesRight = {
 ---
 
 <header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-  <!-- Top bar -->
-  <div>
-    <div class="mx-auto max-w-[1440px] px-6 md:px-8">
-      <ul class="hidden items-center gap-6 py-2 md:flex">
-        {topLinks.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              class="group flex items-center gap-1 text-xs text-text-muted transition-colors hover:text-text-primary"
-            >
-              {link.label}
-              <svg class="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </div>
 
   <!-- Main nav -->
-  <div id="main-nav" class="relative">
-    <nav class="mx-auto flex max-w-[1440px] items-stretch px-6 md:px-8">
+  <div id="main-nav" class="relative" style="background: transparent; border: 1px solid transparent; border-radius: 0; margin: 0; box-shadow: none; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
+    <!-- Mouse-follow glow -->
+    <div id="nav-glow" class="pointer-events-none absolute inset-0 z-[1] overflow-hidden rounded-[inherit] opacity-0 transition-opacity duration-500" style="background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,87,51,0.12), transparent 60%);"></div>
+    <nav class="relative z-[2] mx-auto flex max-w-[1440px] items-stretch px-6 md:px-8">
       <!-- Logo -->
       <a href="/" class="mr-auto flex items-center flex-shrink-0 py-3">
         <img src="/logo.svg" alt={SITE.name} class="h-7 w-auto sm:h-8" />
@@ -331,7 +313,7 @@ const servicesRight = {
         </li>
       </ul>
 
-      <!-- Right: CTA + Search + Lang -->
+      <!-- Right: CTA + Theme + Search + Lang -->
       <div class="hidden items-center gap-4 ml-6 lg:flex">
         <a
           href="#contact"
@@ -339,37 +321,58 @@ const servicesRight = {
         >
           Contact us
         </a>
+        
+        <!-- Theme toggle -->
+        <button
+          id="theme-toggle"
+          aria-label="Toggle theme"
+          class="relative p-2 rounded-xl transition-colors text-text-secondary hover:bg-surface-elevated hover:text-text-primary cursor-pointer"
+        >
+          <div class="relative w-[18px] h-[18px]">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <div id="theme-slash" class="absolute inset-0 flex items-center justify-center transition-opacity opacity-0">
+              <div class="w-[22px] h-[1.5px] bg-current rotate-45 rounded-full"></div>
+            </div>
+          </div>
+        </button>
+
         <button id="search-open-btn" aria-label="Search" class="p-1.5 text-text-secondary transition-colors duration-200 hover:text-text-primary cursor-pointer">
           <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
         </button>
         <div class="relative" id="lang-switcher">
-          <button id="lang-btn" class="flex items-center gap-1 text-xs font-medium text-text-secondary transition-colors duration-200 hover:text-text-primary cursor-pointer">
+          <button id="lang-btn" class="flex items-center gap-1.5 text-xs font-medium text-text-secondary transition-colors duration-200 hover:text-text-primary cursor-pointer">
+            <svg class="h-3.5 w-3.5 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9" />
+            </svg>
             EN
-            <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="h-2.5 w-2.5 transition-transform duration-200" id="lang-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
-          <div id="lang-dropdown" class="hidden absolute right-0 top-full mt-3 w-48 bg-surface border border-border/50 shadow-xl shadow-black/30 z-50 py-2">
-            <div class="grid grid-cols-2 gap-y-1 px-2">
-              <a href="#" class="flex items-center gap-2 px-2 py-1.5 text-xs transition-colors hover:bg-surface-elevated"><span class="font-semibold text-primary">EN</span><span class="text-text-secondary">English</span></a>
-              <a href="#" class="flex items-center gap-2 px-2 py-1.5 text-xs transition-colors hover:bg-surface-elevated"><span class="font-semibold text-text-primary">DE</span><span class="text-text-secondary">Deutsch</span></a>
-              <a href="#" class="flex items-center gap-2 px-2 py-1.5 text-xs transition-colors hover:bg-surface-elevated"><span class="font-semibold text-text-primary">IT</span><span class="text-text-secondary">Italiano</span></a>
-              <a href="#" class="flex items-center gap-2 px-2 py-1.5 text-xs transition-colors hover:bg-surface-elevated"><span class="font-semibold text-text-primary">NL</span><span class="text-text-secondary">Nederlands</span></a>
-              <a href="#" class="flex items-center gap-2 px-2 py-1.5 text-xs transition-colors hover:bg-surface-elevated"><span class="font-semibold text-text-primary">FR</span><span class="text-text-secondary">Français</span></a>
-              <a href="#" class="flex items-center gap-2 px-2 py-1.5 text-xs transition-colors hover:bg-surface-elevated"><span class="font-semibold text-text-primary">ES</span><span class="text-text-secondary">Español</span></a>
-              <a href="#" class="flex items-center gap-2 px-2 py-1.5 text-xs transition-colors hover:bg-surface-elevated"><span class="font-semibold text-text-primary">SV</span><span class="text-text-secondary">Svenska</span></a>
-              <a href="#" class="flex items-center gap-2 px-2 py-1.5 text-xs transition-colors hover:bg-surface-elevated"><span class="font-semibold text-text-primary">PT</span><span class="text-text-secondary">Português</span></a>
-              <a href="#" class="flex items-center gap-2 px-2 py-1.5 text-xs transition-colors hover:bg-surface-elevated"><span class="font-semibold text-text-primary">PL</span><span class="text-text-secondary">Polski</span></a>
-              <a href="#" class="flex items-center gap-2 px-2 py-1.5 text-xs transition-colors hover:bg-surface-elevated"><span class="font-semibold text-text-primary">NB</span><span class="text-text-secondary">Norsk</span></a>
+          <div id="lang-dropdown" class="hidden absolute right-0 top-full mt-4 w-56 bg-[#111116] border border-white/[0.08] shadow-[0_12px_40px_rgba(0,0,0,0.6)] z-50 py-3 px-3 lang-dropdown-enter">
+            <p class="text-[9px] font-mono text-text-muted/40 uppercase tracking-wider mb-2 px-1">Select language</p>
+            <div class="grid grid-cols-2 gap-1">
+              <a href="#" class="flex items-center gap-2 px-2.5 py-2 text-xs transition-all duration-200 hover:bg-white/[0.04] border border-primary/20 bg-primary/[0.03]"><span class="font-semibold text-primary">EN</span><span class="text-text-secondary">English</span></a>
+              <a href="#" class="flex items-center gap-2 px-2.5 py-2 text-xs transition-all duration-200 hover:bg-white/[0.04]"><span class="font-medium text-text-primary">DE</span><span class="text-text-muted">Deutsch</span></a>
+              <a href="#" class="flex items-center gap-2 px-2.5 py-2 text-xs transition-all duration-200 hover:bg-white/[0.04]"><span class="font-medium text-text-primary">FR</span><span class="text-text-muted">Français</span></a>
+              <a href="#" class="flex items-center gap-2 px-2.5 py-2 text-xs transition-all duration-200 hover:bg-white/[0.04]"><span class="font-medium text-text-primary">ES</span><span class="text-text-muted">Español</span></a>
+              <a href="#" class="flex items-center gap-2 px-2.5 py-2 text-xs transition-all duration-200 hover:bg-white/[0.04]"><span class="font-medium text-text-primary">IT</span><span class="text-text-muted">Italiano</span></a>
+              <a href="#" class="flex items-center gap-2 px-2.5 py-2 text-xs transition-all duration-200 hover:bg-white/[0.04]"><span class="font-medium text-text-primary">PT</span><span class="text-text-muted">Português</span></a>
+              <a href="#" class="flex items-center gap-2 px-2.5 py-2 text-xs transition-all duration-200 hover:bg-white/[0.04]"><span class="font-medium text-text-primary">NL</span><span class="text-text-muted">Nederlands</span></a>
+              <a href="#" class="flex items-center gap-2 px-2.5 py-2 text-xs transition-all duration-200 hover:bg-white/[0.04]"><span class="font-medium text-text-primary">PL</span><span class="text-text-muted">Polski</span></a>
+              <a href="#" class="flex items-center gap-2 px-2.5 py-2 text-xs transition-all duration-200 hover:bg-white/[0.04]"><span class="font-medium text-text-primary">SV</span><span class="text-text-muted">Svenska</span></a>
+              <a href="#" class="flex items-center gap-2 px-2.5 py-2 text-xs transition-all duration-200 hover:bg-white/[0.04]"><span class="font-medium text-text-primary">NB</span><span class="text-text-muted">Norsk</span></a>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Search overlay (compact, replaces nav on open) -->
-      <div id="search-bar" class="hidden items-center ml-auto gap-3 w-[400px]">
+      <div id="search-bar" class="hidden items-center ml-auto gap-3 w-full max-w-[600px]">
         <svg class="h-4 w-4 text-text-muted flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
@@ -437,15 +440,22 @@ const servicesRight = {
       </div>
 
       <!-- Mobile language selector -->
-      <div class="pt-6 border-t border-border/30 mt-6">
-        <p class="text-xs text-text-muted mb-3 uppercase tracking-wider font-medium">Language</p>
-        <div class="grid grid-cols-3 gap-2">
-          <button class="py-2 text-xs font-medium text-primary border border-primary/30 bg-primary/5 text-center">EN</button>
-          <button class="py-2 text-xs text-text-secondary border border-border/30 text-center transition-colors hover:border-primary/30">DE</button>
-          <button class="py-2 text-xs text-text-secondary border border-border/30 text-center transition-colors hover:border-primary/30">FR</button>
-          <button class="py-2 text-xs text-text-secondary border border-border/30 text-center transition-colors hover:border-primary/30">ES</button>
-          <button class="py-2 text-xs text-text-secondary border border-border/30 text-center transition-colors hover:border-primary/30">IT</button>
-          <button class="py-2 text-xs text-text-secondary border border-border/30 text-center transition-colors hover:border-primary/30">PT</button>
+      <div class="pt-6 border-t border-white/[0.06] mt-6">
+        <div class="flex items-center gap-2 mb-4">
+          <svg class="h-4 w-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9" />
+          </svg>
+          <p class="text-xs text-text-muted uppercase tracking-wider font-medium">Language</p>
+        </div>
+        <div class="grid grid-cols-4 gap-2">
+          <button class="py-2.5 text-xs font-medium text-primary border border-primary/30 bg-primary/5 text-center">EN</button>
+          <button class="py-2.5 text-xs text-text-secondary border border-white/[0.06] text-center transition-colors active:border-primary/30 active:text-primary">DE</button>
+          <button class="py-2.5 text-xs text-text-secondary border border-white/[0.06] text-center transition-colors active:border-primary/30 active:text-primary">FR</button>
+          <button class="py-2.5 text-xs text-text-secondary border border-white/[0.06] text-center transition-colors active:border-primary/30 active:text-primary">ES</button>
+          <button class="py-2.5 text-xs text-text-secondary border border-white/[0.06] text-center transition-colors active:border-primary/30 active:text-primary">IT</button>
+          <button class="py-2.5 text-xs text-text-secondary border border-white/[0.06] text-center transition-colors active:border-primary/30 active:text-primary">PT</button>
+          <button class="py-2.5 text-xs text-text-secondary border border-white/[0.06] text-center transition-colors active:border-primary/30 active:text-primary">NL</button>
+          <button class="py-2.5 text-xs text-text-secondary border border-white/[0.06] text-center transition-colors active:border-primary/30 active:text-primary">PL</button>
         </div>
       </div>
     </div>
@@ -459,37 +469,39 @@ const servicesRight = {
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Glassmorphism on scroll */
+  #main-nav {
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Glass fade in */
+  #site-header.header-scrolled #nav-glass,
+  #site-header.header-hover #nav-glass,
+  #site-header.header-dropdown-open #nav-glass {
+    opacity: 1 !important;
+  }
+
+  /* Dock effect — handled by JS direct style */
+  #main-nav {
+    will-change: background, border-radius, margin, border-color, box-shadow, backdrop-filter;
+  }
+
+  @media (min-width: 1024px) {
+    /* placeholder for responsive — JS handles values */
+  }
+
+  /* Solid bg on scroll */
   #site-header.header-scrolled {
-    background: rgba(6, 6, 10, 0.88);
-    backdrop-filter: blur(64px) saturate(2);
-    -webkit-backdrop-filter: blur(64px) saturate(2);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    box-shadow:
-      0 16px 80px rgba(0, 0, 0, 0.6),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    background: transparent;
   }
 
-  /* Glassmorphism on hover (when not already scrolled) */
+  /* Solid bg on hover */
   #site-header.header-hover {
-    background: rgba(6, 6, 10, 0.82);
-    backdrop-filter: blur(64px) saturate(2);
-    -webkit-backdrop-filter: blur(64px) saturate(2);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    box-shadow:
-      0 8px 40px rgba(0, 0, 0, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    background: transparent;
   }
 
-  /* Glassmorphism when dropdown is open */
+  /* Solid bg when dropdown is open */
   #site-header.header-dropdown-open {
-    background: rgba(6, 6, 10, 0.92);
-    backdrop-filter: blur(64px) saturate(2);
-    -webkit-backdrop-filter: blur(64px) saturate(2);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    box-shadow:
-      0 16px 80px rgba(0, 0, 0, 0.6),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    background: transparent;
   }
 
   /* Bottom line on main-nav */
@@ -614,14 +626,19 @@ const servicesRight = {
   // Language switcher
   const langBtn = document.getElementById('lang-btn');
   const langDropdown = document.getElementById('lang-dropdown');
+  const langChevron = document.getElementById('lang-chevron');
 
   langBtn?.addEventListener('click', () => {
-    langDropdown?.classList.toggle('hidden');
+    const isHidden = langDropdown?.classList.toggle('hidden');
+    if (langChevron) {
+      langChevron.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
+    }
   });
 
   document.addEventListener('click', (e) => {
     if (!document.getElementById('lang-switcher')?.contains(e.target as Node)) {
       langDropdown?.classList.add('hidden');
+      if (langChevron) langChevron.style.transform = 'rotate(0deg)';
     }
   });
 
@@ -635,8 +652,10 @@ const servicesRight = {
 
     if (currentScroll > 50) {
       header?.classList.add('header-scrolled');
+      dockIn();
     } else {
       header?.classList.remove('header-scrolled');
+      if (!header?.classList.contains('header-hover')) dockOut();
     }
 
     if (!prefersReducedMotion && currentScroll > 100) {
@@ -668,14 +687,84 @@ const servicesRight = {
     observer.observe(navContainer, { subtree: true, attributes: true, attributeFilter: ['class'] });
   }
 
-  // Activate bg blur on any header hover
+  // Direct style dock animation (Framer Motion style)
+  const mainNav = document.getElementById('main-nav');
+  const navGlow = document.getElementById('nav-glow');
+  const isLg = () => window.innerWidth >= 1024;
+
+  function dockIn() {
+    if (!mainNav) return;
+    mainNav.style.background = 'linear-gradient(135deg, rgba(25, 25, 35, 0.98), rgba(15, 15, 22, 0.98))';
+    mainNav.style.backdropFilter = 'blur(20px)';
+    (mainNav.style as any).webkitBackdropFilter = 'blur(20px)';
+    mainNav.style.borderRadius = '14px';
+    mainNav.style.margin = isLg() ? '10px 40px' : '8px 16px';
+    mainNav.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+    mainNav.style.boxShadow = '0 4px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03) inset';
+  }
+
+  function dockOut() {
+    if (!mainNav) return;
+    mainNav.style.background = 'transparent';
+    mainNav.style.backdropFilter = 'none';
+    (mainNav.style as any).webkitBackdropFilter = 'none';
+    mainNav.style.borderRadius = '0';
+    mainNav.style.margin = '0';
+    mainNav.style.borderColor = 'transparent';
+    mainNav.style.boxShadow = 'none';
+  }
+
   header?.addEventListener('mouseenter', () => {
     if (!header.classList.contains('header-scrolled')) {
       header.classList.add('header-hover');
     }
+    dockIn();
   });
 
   header?.addEventListener('mouseleave', () => {
     header?.classList.remove('header-hover');
+    if (!header?.classList.contains('header-scrolled') && !header?.classList.contains('header-dropdown-open')) {
+      dockOut();
+    }
+  });
+
+  // Theme toggle
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeSlash = document.getElementById('theme-slash');
+  
+  const updateTheme = () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    if (themeSlash) {
+      themeSlash.style.opacity = isDark ? '1' : '0';
+    }
+  };
+  
+  themeToggle?.addEventListener('click', () => {
+    document.documentElement.classList.toggle('dark');
+    const isDark = document.documentElement.classList.contains('dark');
+    localStorage.setItem('ellietech_theme', isDark ? 'dark' : 'light');
+    updateTheme();
+  });
+  
+  // Initialize theme on load
+  updateTheme();
+
+  // Nav glow follow mouse
+  mainNav?.addEventListener('mousemove', (e) => {
+    const rect = mainNav.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    mainNav.style.setProperty('--mouse-x', `${x}px`);
+    mainNav.style.setProperty('--mouse-y', `${y}px`);
+  });
+
+  mainNav?.addEventListener('mouseenter', () => {
+    navGlow?.classList.remove('opacity-0');
+    navGlow?.classList.add('opacity-100');
+  });
+
+  mainNav?.addEventListener('mouseleave', () => {
+    navGlow?.classList.add('opacity-0');
+    navGlow?.classList.remove('opacity-100');
   });
 </script>
