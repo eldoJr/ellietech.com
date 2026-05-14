@@ -1,0 +1,128 @@
+---
+const stack = {
+  frontend: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Astro'],
+  backend: ['Node.js', 'Python', 'PostgreSQL', 'Redis', 'GraphQL'],
+  mobile: ['React Native', 'Swift', 'Kotlin', 'Flutter'],
+  cloud: ['AWS', 'Vercel', 'Docker', 'Kubernetes', 'Terraform'],
+  ai: ['OpenAI', 'LangChain', 'TensorFlow', 'PyTorch', 'Hugging Face'],
+  tools: ['GitHub', 'Linear', 'Figma', 'Sentry', 'PostHog'],
+};
+---
+
+<section id="tech-stack" class="px-6 py-32 bg-surface-elevated dark:bg-surface">
+  <div class="mx-auto max-w-[1440px] px-0 md:px-8">
+    <!-- Header -->
+    <div class="mb-20">
+      <span class="text-xs font-mono text-primary/70 uppercase tracking-widest mb-4 block">Tech stack</span>
+      <div class="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-start">
+        <h2 class="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+          Modern tools for<br />modern products
+        </h2>
+        <div class="lg:pt-4">
+          <p class="text-sm leading-relaxed text-text-secondary max-w-md">
+            We use battle-tested technologies that enable rapid development, easy maintenance, and seamless scaling.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stack grid -->
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="border border-border/30 p-6 stack-category" data-index="0">
+        <h3 class="text-sm font-semibold mb-4 text-primary">Frontend</h3>
+        <div class="flex flex-wrap gap-2">
+          {stack.frontend.map((tech) => (
+            <span class="text-xs border border-border/30 px-3 py-1.5 text-text-secondary hover:border-primary/30 hover:text-primary transition-colors">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div class="border border-border/30 p-6 stack-category" data-index="1">
+        <h3 class="text-sm font-semibold mb-4 text-primary">Backend</h3>
+        <div class="flex flex-wrap gap-2">
+          {stack.backend.map((tech) => (
+            <span class="text-xs border border-border/30 px-3 py-1.5 text-text-secondary hover:border-primary/30 hover:text-primary transition-colors">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div class="border border-border/30 p-6 stack-category" data-index="2">
+        <h3 class="text-sm font-semibold mb-4 text-primary">Mobile</h3>
+        <div class="flex flex-wrap gap-2">
+          {stack.mobile.map((tech) => (
+            <span class="text-xs border border-border/30 px-3 py-1.5 text-text-secondary hover:border-primary/30 hover:text-primary transition-colors">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div class="border border-border/30 p-6 stack-category" data-index="3">
+        <h3 class="text-sm font-semibold mb-4 text-primary">Cloud & DevOps</h3>
+        <div class="flex flex-wrap gap-2">
+          {stack.cloud.map((tech) => (
+            <span class="text-xs border border-border/30 px-3 py-1.5 text-text-secondary hover:border-primary/30 hover:text-primary transition-colors">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div class="border border-border/30 p-6 stack-category" data-index="4">
+        <h3 class="text-sm font-semibold mb-4 text-primary">AI & ML</h3>
+        <div class="flex flex-wrap gap-2">
+          {stack.ai.map((tech) => (
+            <span class="text-xs border border-border/30 px-3 py-1.5 text-text-secondary hover:border-primary/30 hover:text-primary transition-colors">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div class="border border-border/30 p-6 stack-category" data-index="5">
+        <h3 class="text-sm font-semibold mb-4 text-primary">Tools</h3>
+        <div class="flex flex-wrap gap-2">
+          {stack.tools.map((tech) => (
+            <span class="text-xs border border-border/30 px-3 py-1.5 text-text-secondary hover:border-primary/30 hover:text-primary transition-colors">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const categories = entry.target.querySelectorAll('.stack-category');
+          categories.forEach((cat, i) => {
+            setTimeout(() => {
+              (cat as HTMLElement).style.opacity = '1';
+              (cat as HTMLElement).style.transform = 'translateY(0)';
+            }, i * 80);
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  const section = document.getElementById('tech-stack');
+  if (section) {
+    section.querySelectorAll('.stack-category').forEach((cat) => {
+      (cat as HTMLElement).style.opacity = '0';
+      (cat as HTMLElement).style.transform = 'translateY(20px)';
+      (cat as HTMLElement).style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+    });
+    observer.observe(section);
+  }
+</script>

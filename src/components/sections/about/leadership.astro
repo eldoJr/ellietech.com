@@ -1,0 +1,139 @@
+---
+const leaders = [
+  {
+    name: 'Sarah Chen',
+    role: 'CEO & Co-founder',
+    bio: '15+ years building scalable systems at Google and Stripe. Led engineering teams from 5 to 200+.',
+    linkedin: '#',
+    image: '/team/placeholder.jpg',
+  },
+  {
+    name: 'Marcus Rodriguez',
+    role: 'CTO & Co-founder',
+    bio: 'Former Principal Engineer at AWS. Architected systems serving 100M+ users.',
+    linkedin: '#',
+    image: '/team/placeholder.jpg',
+  },
+  {
+    name: 'Elena Volkov',
+    role: 'VP of Engineering',
+    bio: '12 years in fintech. Built trading platforms processing $10B+ daily volume.',
+    linkedin: '#',
+    image: '/team/placeholder.jpg',
+  },
+  {
+    name: 'James Park',
+    role: 'VP of Product',
+    bio: 'Product leader from Airbnb and Uber. Shipped features used by millions.',
+    linkedin: '#',
+    image: '/team/placeholder.jpg',
+  },
+  {
+    name: 'Aisha Patel',
+    role: 'VP of Design',
+    bio: 'Design systems expert. Previously at Apple and Figma.',
+    linkedin: '#',
+    image: '/team/placeholder.jpg',
+  },
+  {
+    name: 'David Kim',
+    role: 'VP of Operations',
+    bio: 'Scaled operations at 3 unicorn startups. MBA from Stanford.',
+    linkedin: '#',
+    image: '/team/placeholder.jpg',
+  },
+];
+---
+
+<section id="leadership" class="px-6 py-32">
+  <div class="mx-auto max-w-[1440px] px-0 md:px-8">
+    <!-- Header -->
+    <div class="mb-20">
+      <span class="text-xs font-mono text-primary/70 uppercase tracking-widest mb-4 block">Leadership</span>
+      <div class="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-start">
+        <h2 class="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+          Led by engineers<br />who ship
+        </h2>
+        <div class="lg:pt-4">
+          <p class="text-sm leading-relaxed text-text-secondary max-w-md">
+            Our leadership team has built products at Google, AWS, Stripe, and Airbnb. They write code, review PRs, and understand the challenges you face.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team grid -->
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {leaders.map((leader, i) => (
+        <div
+          class="group relative border border-border/30 overflow-hidden transition-all duration-300 hover:border-primary/30 leader-card"
+          data-index={i}
+        >
+          <!-- Image placeholder -->
+          <div class="aspect-[4/5] bg-gradient-to-br from-surface-elevated to-surface relative overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center text-6xl font-bold text-white/5">
+              {leader.name.split(' ').map(n => n[0]).join('')}
+            </div>
+          </div>
+          
+          <!-- Content -->
+          <div class="p-6">
+            <h3 class="text-lg font-semibold mb-1 transition-colors duration-300 group-hover:text-primary">
+              {leader.name}
+            </h3>
+            <p class="text-xs text-primary/70 font-medium mb-3">{leader.role}</p>
+            <p class="text-xs text-text-muted leading-relaxed mb-4">
+              {leader.bio}
+            </p>
+            
+            <!-- LinkedIn -->
+            <a
+              href={leader.linkedin}
+              class="inline-flex items-center gap-2 text-xs text-text-secondary transition-colors hover:text-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+              Connect
+            </a>
+          </div>
+          
+          <!-- Hover accent -->
+          <div class="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-primary to-transparent transition-all duration-500 group-hover:w-full"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const cards = entry.target.querySelectorAll('.leader-card');
+          cards.forEach((card, i) => {
+            setTimeout(() => {
+              (card as HTMLElement).style.opacity = '1';
+              (card as HTMLElement).style.transform = 'translateY(0)';
+            }, i * 80);
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  const section = document.getElementById('leadership');
+  if (section) {
+    section.querySelectorAll('.leader-card').forEach((card) => {
+      (card as HTMLElement).style.opacity = '0';
+      (card as HTMLElement).style.transform = 'translateY(20px)';
+      (card as HTMLElement).style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+    });
+    observer.observe(section);
+  }
+</script>

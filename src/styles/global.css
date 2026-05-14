@@ -26,6 +26,27 @@
         scroll-behavior: smooth;
     }
 
+    /* Dark mode (default) */
+    .dark body {
+        @apply bg-surface text-text-primary font-sans antialiased;
+    }
+
+    /* Light mode */
+    html:not(.dark) body {
+        background: #fafafa;
+        color: #0f172a;
+    }
+
+    html:not(.dark) {
+        --color-surface: #fafafa;
+        --color-surface-light: #ffffff;
+        --color-surface-elevated: #f1f5f9;
+        --color-text-primary: #0f172a;
+        --color-text-secondary: #475569;
+        --color-text-muted: #94a3b8;
+        --color-border: #e2e8f0;
+    }
+
     body {
         @apply bg-surface text-text-primary font-sans antialiased;
     }

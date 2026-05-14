@@ -1,0 +1,109 @@
+---
+const values = [
+  {
+    icon: 'code',
+    title: 'Code quality matters',
+    description: 'Clean, maintainable, well-tested code. We write software that lasts and scales.',
+  },
+  {
+    icon: 'rocket',
+    title: 'Ship early, ship often',
+    description: 'Real feedback beats perfect planning. We iterate based on actual user behavior.',
+  },
+  {
+    icon: 'users-2',
+    title: 'User-first mindset',
+    description: 'Every feature decision starts with user needs, not technical preferences.',
+  },
+  {
+    icon: 'lightbulb',
+    title: 'Innovation over convention',
+    description: 'We challenge assumptions and explore new approaches to solve old problems.',
+  },
+];
+---
+
+<section id="values" class="px-6 py-32">
+  <div class="mx-auto max-w-[1440px] px-0 md:px-8">
+    <!-- Header -->
+    <div class="mb-20">
+      <span class="text-xs font-mono text-primary/70 uppercase tracking-widest mb-4 block">Our values</span>
+      <div class="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-start">
+        <h2 class="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+          What drives us<br />every day
+        </h2>
+        <div class="lg:pt-4">
+          <p class="text-sm leading-relaxed text-text-secondary max-w-md">
+            These principles guide how we build products, work with clients, and grow as a team.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Values grid -->
+    <div class="grid gap-8 sm:grid-cols-2">
+      {values.map((value, i) => (
+        <div
+          class="group relative border border-border/30 p-8 transition-all duration-300 hover:border-primary/30 hover:bg-surface-elevated/50 value-card"
+          data-index={i}
+        >
+          <div class="mb-4 text-primary">
+            <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {value.icon === 'code' && (
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+              )}
+              {value.icon === 'rocket' && (
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              )}
+              {value.icon === 'users-2' && (
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+              )}
+              {value.icon === 'lightbulb' && (
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+              )}
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 transition-colors duration-300 group-hover:text-primary">
+            {value.title}
+          </h3>
+          <p class="text-sm text-text-muted leading-relaxed">
+            {value.description}
+          </p>
+          
+          <!-- Hover accent -->
+          <div class="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-primary to-transparent transition-all duration-500 group-hover:w-full"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const cards = entry.target.querySelectorAll('.value-card');
+          cards.forEach((card, i) => {
+            setTimeout(() => {
+              (card as HTMLElement).style.opacity = '1';
+              (card as HTMLElement).style.transform = 'translateY(0)';
+            }, i * 100);
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  const section = document.getElementById('values');
+  if (section) {
+    section.querySelectorAll('.value-card').forEach((card) => {
+      (card as HTMLElement).style.opacity = '0';
+      (card as HTMLElement).style.transform = 'translateY(20px)';
+      (card as HTMLElement).style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+    });
+    observer.observe(section);
+  }
+</script>

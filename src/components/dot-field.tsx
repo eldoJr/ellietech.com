@@ -53,6 +53,7 @@ const DotField = memo(({
   const sizeRef = useRef({ w: 0, h: 0, offsetX: 0, offsetY: 0 });
   const glowOpacity = useRef(0);
   const engagement = useRef(0);
+  const themeRef = useRef<'dark' | 'light'>('dark');
   const propsRef = useRef<Record<string, unknown>>({});
   propsRef.current = { dotRadius, dotSpacing, cursorRadius, cursorForce, bulgeOnly, bulgeStrength, sparkle, waveAmplitude, gradientFrom, gradientTo };
   const rebuildRef = useRef<(() => void) | null>(null);
@@ -158,9 +159,13 @@ const DotField = memo(({
 
       ctx!.clearRect(0, 0, w, h);
 
+      const isDark = themeRef.current === 'dark';
+      const fromColor = isDark ? (p.gradientFrom as string) : 'rgba(255, 107, 53, 0.25)';
+      const toColor = isDark ? (p.gradientTo as string) : 'rgba(255, 140, 90, 0.20)';
+
       const grad = ctx!.createLinearGradient(0, 0, w, h);
-      grad.addColorStop(0, p.gradientFrom as string);
-      grad.addColorStop(1, p.gradientTo as string);
+      grad.addColorStop(0, fromColor);
+      grad.addColorStop(1, toColor);
       ctx!.fillStyle = grad;
 
       const cr = p.cursorRadius as number;
@@ -236,6 +241,13 @@ const DotField = memo(({
     window.addEventListener('mousemove', onMouseMove, { passive: true });
     rafRef.current = requestAnimationFrame(tick);
 
+    // Watch theme changes
+    themeRef.current = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    const themeObserver = new MutationObserver(() => {
+      themeRef.current = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    });
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
     rebuildRef.current = () => {
       const { w, h } = sizeRef.current;
       if (w > 0 && h > 0) buildDots(w, h);
@@ -247,8 +259,9 @@ const DotField = memo(({
       clearTimeout(resizeTimer);
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', onMouseMove);
+      themeObserver.disconnect();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
