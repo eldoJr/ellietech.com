@@ -1,6 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import Header from '../components/header.astro';
+import HeaderWrapper from '../components/header-wrapper.astro';
 import Footer from '../components/footer.astro';
 
 interface Props {
@@ -22,7 +22,7 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
 ---
 
 <BaseLayout title={`${title} — EllieTech Blog`} description={description}>
-  <Header />
+  <HeaderWrapper />
   <main class="px-6 pb-32 pt-32">
     <article class="mx-auto max-w-3xl">
       <header class="mb-12">

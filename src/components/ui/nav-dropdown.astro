@@ -24,7 +24,7 @@ const { label, href = '#' } = Astro.props;
     class="nav-dropdown-panel fixed left-0 right-0 z-[100] overflow-hidden"
     data-dropdown-panel
   >
-    <div class="nav-dropdown-inner dark:bg-gradient-to-b dark:from-[rgba(25,25,35,0.98)] dark:to-[rgba(15,15,22,0.98)] bg-white/98 backdrop-blur-xl dark:backdrop-blur-none border-b dark:border-white/[0.08] border-black/[0.08] dark:shadow-[0_4px_24px_rgba(0,0,0,0.5),inset_0_0_0_1px_rgba(255,255,255,0.03)] shadow-[0_4px_24px_rgba(0,0,0,0.08),0_1px_3px_rgba(0,0,0,0.04)]">
+    <div class="nav-dropdown-inner backdrop-blur-xl bg-white/70 dark:bg-gray-900/70 border-b border-white/20 dark:border-gray-700/30 shadow-lg">
       <div class="mx-auto max-w-[1320px] px-8 py-8">
         <slot />
       </div>
