@@ -1,1 +1,104 @@
 @import "tailwindcss";
+@import "@fontsource-variable/geist";
+
+@theme {
+  --font-sans: "Geist Variable", "Inter", system-ui, sans-serif;
+  --font-weight-normal: 300;
+  --blur-glass: 20px;
+}
+
+/* ── Dark theme (default) ── */
+[data-theme="dark"] {
+  --bg:              #020205;
+  --fg:              #e0e7ff;
+  --fg-dim:          rgba(224, 231, 255, 0.45);
+  --fg-muted:        rgba(224, 231, 255, 0.25);
+  --accent:          #a5b4fc;
+  --surface:         rgba(224, 231, 255, 0.04);
+  --surface-hover:   rgba(224, 231, 255, 0.10);
+  --border:          rgba(224, 231, 255, 0.08);
+  --border-strong:   rgba(224, 231, 255, 0.14);
+  --border-hover:    rgba(224, 231, 255, 0.28);
+  --nav-bg-scrolled: rgba(2, 2, 5, 0.72);
+  --nav-border:      rgba(224, 231, 255, 0.06);
+  --overlay-bg:      rgba(2, 2, 5, 0.96);
+  --glow:            rgba(99, 102, 241, 0.12);
+  --shadow:          rgba(0, 0, 0, 0.6);
+}
+
+/* ── Light theme ── */
+[data-theme="light"] {
+  --bg:              #f8f8fc;
+  --fg:              #0d0d1a;
+  --fg-dim:          rgba(13, 13, 26, 0.5);
+  --fg-muted:        rgba(13, 13, 26, 0.3);
+  --accent:          #4f46e5;
+  --surface:         rgba(13, 13, 26, 0.04);
+  --surface-hover:   rgba(13, 13, 26, 0.08);
+  --border:          rgba(13, 13, 26, 0.08);
+  --border-strong:   rgba(13, 13, 26, 0.14);
+  --border-hover:    rgba(13, 13, 26, 0.28);
+  --nav-bg-scrolled: rgba(248, 248, 252, 0.80);
+  --nav-border:      rgba(13, 13, 26, 0.08);
+  --overlay-bg:      rgba(248, 248, 252, 0.97);
+  --glow:            rgba(79, 70, 229, 0.08);
+  --shadow:          rgba(0, 0, 0, 0.12);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background-color: var(--bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  transition: background-color 0.4s ease;
+}
+
+.glass {
+  background: var(--surface);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.glass-iridescent {
+  background: linear-gradient(
+    135deg,
+    var(--surface) 0%,
+    rgba(165, 180, 252, 0.06) 30%,
+    rgba(99, 102, 241, 0.04) 60%,
+    var(--surface) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-strong);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px var(--shadow);
+}
+
+.gradient-depth {
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 0%,
+    var(--glow) 0%,
+    transparent 70%
+  );
+}
+
+.text-thin   { font-weight: 200; }
+.text-light  { font-weight: 300; }
+.text-normal { font-weight: 400; }
+
