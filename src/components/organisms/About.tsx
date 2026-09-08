@@ -1,12 +1,11 @@
 import { motion } from "motion/react";
-import { GitFork, Link, Globe } from "lucide-react";
 import { about } from "@/lib/about";
 
 const fadeUp = (delay = 0) => ({
   initial:     { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0  },
   viewport:    { once: true, margin: "-40px" },
-  transition:  { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] as number[] },
+  transition:  { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] as const },
 });
 
 export default function About() {
@@ -50,23 +49,6 @@ export default function About() {
             </div>
           </div>
 
-          {/* Meta strip */}
-          <motion.div
-            className="flex flex-wrap gap-px overflow-hidden rounded-2xl"
-            style={{ border: "1px solid var(--border)" }}
-            {...fadeUp(0.35)}
-          >
-            {[["Founded", company.founded], ["Location", company.location], ["Focus", "Software & Consulting"], ["Model", "Small teams, close to client"]].map(([label, val], i) => (
-              <div
-                key={label}
-                className="flex flex-1 flex-col gap-2 px-6 py-5 min-w-[140px]"
-                style={{ background: "var(--surface)", borderRight: i < 3 ? "1px solid var(--border)" : "none" }}
-              >
-                <span className="text-[0.58rem] uppercase tracking-[0.3em]" style={{ color: "var(--fg-muted)" }}>{label}</span>
-                <span className="text-sm font-light" style={{ color: "var(--fg)" }}>{val}</span>
-              </div>
-            ))}
-          </motion.div>
         </div>
 
         {/* ── 02 Values ── */}
@@ -192,22 +174,22 @@ export default function About() {
                     {member.bio}
                   </p>
                   {/* Social links */}
-                  <div className="flex items-center gap-3 pt-1">
-                    {member.github && (
-                      <a href={member.github} target="_blank" rel="noopener noreferrer" style={{ color: "var(--fg-muted)", transition: "color 0.2s" }} onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = "var(--fg)"} onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = "var(--fg-muted)"}>
-                        <GitFork size={14} />
+                  <div className="flex items-center gap-4">
+                    {[
+                      member.linkedin && { href: member.linkedin, d: 'M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z M4 6a2 2 0 100-4 2 2 0 000 4z' },
+                      member.github   && { href: member.github,   d: 'M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22' },
+                      member.portfolio && { href: member.portfolio, d: 'M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14' },
+                    ].filter(Boolean).map((link, i) => (
+                      <a key={i} href={(link as {href:string}).href} target="_blank" rel="noopener noreferrer"
+                        style={{ color: "var(--fg-muted)", transition: "color 0.2s" }}
+                        onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = "var(--fg)"}
+                        onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = "var(--fg-muted)"}
+                      >
+                        <svg width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                          <path d={(link as {d:string}).d} />
+                        </svg>
                       </a>
-                    )}
-                    {member.linkedin && (
-                      <a href={member.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: "var(--fg-muted)", transition: "color 0.2s" }} onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = "var(--fg)"} onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = "var(--fg-muted)"}>
-                        <Link size={14} />
-                      </a>
-                    )}
-                    {member.portfolio && (
-                      <a href={member.portfolio} target="_blank" rel="noopener noreferrer" style={{ color: "var(--fg-muted)", transition: "color 0.2s" }} onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = "var(--fg)"} onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = "var(--fg-muted)"}>
-                        <Globe size={14} />
-                      </a>
-                    )}
+                    ))}
                   </div>
                 </div>
               </motion.div>

@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import HeroBadge      from "@/components/atoms/HeroBadge";
 import ScrollIndicator from "@/components/atoms/ScrollIndicator";
 import HeroHeadline    from "@/components/molecules/HeroHeadline";
+import DotField        from "@/components/atoms/DotField";
 
 export default function Hero() {
   return (
@@ -10,6 +11,11 @@ export default function Hero() {
       className="relative flex min-h-dvh flex-col overflow-hidden"
       style={{ background: "var(--bg)" }}
     >
+      {/* Dot field background */}
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <DotField dotRadius={1.5} dotSpacing={18} bulgeOnly bulgeStrength={60} glowRadius={180} />
+      </div>
+
       {/* Ambient glow orbs */}
       <div
         className="pointer-events-none absolute"

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { Send, GitFork, Link, Globe } from "lucide-react";
+import { Send } from "lucide-react";
 
 const fadeUp = (delay = 0) => ({
   initial:     { opacity: 0, y: 20 },
@@ -8,12 +8,6 @@ const fadeUp = (delay = 0) => ({
   viewport:    { once: true, margin: "-40px" },
   transition:  { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] as number[] },
 });
-
-const SOCIALS = [
-  { label: "GitHub",    href: "https://github.com/eldomacuacua",       icon: GitFork },
-  { label: "LinkedIn",  href: "https://linkedin.com/in/eldomacuacua",  icon: Link    },
-  { label: "Portfolio", href: "https://ellietech.com",                 icon: Globe   },
-];
 
 export default function Contact() {
   const [focused, setFocused] = useState<string | null>(null);
@@ -77,25 +71,6 @@ export default function Contact() {
                 >
                   hello@ellietech.com
                 </a>
-              </div>
-              <div style={{ borderTop: "1px solid var(--border)", paddingTop: "1.5rem" }}>
-                <span className="text-[0.6rem] uppercase tracking-[0.25em] block mb-3" style={{ color: "var(--fg-muted)" }}>Socials</span>
-                <div className="flex items-center gap-4">
-                  {SOCIALS.map(({ label, href, icon: Icon }) => (
-                    <a
-                      key={label}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={label}
-                      style={{ color: "var(--fg-muted)", transition: "color 0.2s" }}
-                      onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = "var(--fg)"}
-                      onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = "var(--fg-muted)"}
-                    >
-                      <Icon size={15} />
-                    </a>
-                  ))}
-                </div>
               </div>
             </motion.div>
           </div>
